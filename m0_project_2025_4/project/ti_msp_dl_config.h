@@ -41,6 +41,7 @@
 #define ti_msp_dl_config_h
 
 #define CONFIG_MSPM0G350X
+#define CONFIG_MSPM0G3505
 
 #if defined(__ti_version__) || defined(__TI_COMPILER_VERSION__)
 #define SYSCONFIG_WEAK __attribute__((weak))
@@ -123,8 +124,25 @@ extern "C" {
 
 
 
+
+/* Defines for I2C_0 */
+#define I2C_0_INST                                                          I2C1
+#define I2C_0_INST_IRQHandler                                    I2C1_IRQHandler
+#define I2C_0_INST_INT_IRQN                                        I2C1_INT_IRQn
+#define I2C_0_BUS_SPEED_HZ                                                800000
+#define GPIO_I2C_0_SDA_PORT                                                GPIOA
+#define GPIO_I2C_0_SDA_PIN                                        DL_GPIO_PIN_30
+#define GPIO_I2C_0_IOMUX_SDA                                      (IOMUX_PINCM5)
+#define GPIO_I2C_0_IOMUX_SDA_FUNC                       IOMUX_PINCM5_PF_I2C1_SDA
+#define GPIO_I2C_0_SCL_PORT                                                GPIOA
+#define GPIO_I2C_0_SCL_PIN                                        DL_GPIO_PIN_29
+#define GPIO_I2C_0_IOMUX_SCL                                      (IOMUX_PINCM4)
+#define GPIO_I2C_0_IOMUX_SCL_FUNC                       IOMUX_PINCM4_PF_I2C1_SCL
+
+
 /* Defines for UART_DEBUG */
 #define UART_DEBUG_INST                                                    UART0
+#define UART_DEBUG_INST_FREQUENCY                                       32000000
 #define UART_DEBUG_INST_IRQHandler                              UART0_IRQHandler
 #define UART_DEBUG_INST_INT_IRQN                                  UART0_INT_IRQn
 #define GPIO_UART_DEBUG_RX_PORT                                            GPIOA
@@ -140,6 +158,25 @@ extern "C" {
 #define UART_DEBUG_FBRD_32_MHZ_115200_BAUD                                  (23)
 
 
+
+
+/* Defines for SPI_0 */
+#define SPI_0_INST                                                         SPI1
+#define SPI_0_INST_IRQHandler                                   SPI1_IRQHandler
+#define SPI_0_INST_INT_IRQN                                       SPI1_INT_IRQn
+#define GPIO_SPI_0_PICO_PORT                                              GPIOB
+#define GPIO_SPI_0_PICO_PIN                                      DL_GPIO_PIN_15
+#define GPIO_SPI_0_IOMUX_PICO                                   (IOMUX_PINCM32)
+#define GPIO_SPI_0_IOMUX_PICO_FUNC                   IOMUX_PINCM32_PF_SPI1_PICO
+#define GPIO_SPI_0_POCI_PORT                                              GPIOA
+#define GPIO_SPI_0_POCI_PIN                                      DL_GPIO_PIN_16
+#define GPIO_SPI_0_IOMUX_POCI                                   (IOMUX_PINCM38)
+#define GPIO_SPI_0_IOMUX_POCI_FUNC                   IOMUX_PINCM38_PF_SPI1_POCI
+/* GPIO configuration for SPI_0 */
+#define GPIO_SPI_0_SCLK_PORT                                              GPIOA
+#define GPIO_SPI_0_SCLK_PIN                                      DL_GPIO_PIN_17
+#define GPIO_SPI_0_IOMUX_SCLK                                   (IOMUX_PINCM39)
+#define GPIO_SPI_0_IOMUX_SCLK_FUNC                   IOMUX_PINCM39_PF_SPI1_SCLK
 
 
 
@@ -161,6 +198,41 @@ extern "C" {
 /* Defines for SDA2: GPIOB.3 with pinCMx 16 on package pin 51 */
 #define OLED_SDA2_PIN                                            (DL_GPIO_PIN_3)
 #define OLED_SDA2_IOMUX                                          (IOMUX_PINCM16)
+/* Port definition for Pin Group PORTB */
+#define PORTB_PORT                                                       (GPIOB)
+
+/* Defines for RST: GPIOB.16 with pinCMx 33 on package pin 4 */
+#define PORTB_RST_PIN                                           (DL_GPIO_PIN_16)
+#define PORTB_RST_IOMUX                                          (IOMUX_PINCM33)
+/* Defines for DC: GPIOB.17 with pinCMx 43 on package pin 14 */
+#define PORTB_DC_PIN                                            (DL_GPIO_PIN_17)
+#define PORTB_DC_IOMUX                                           (IOMUX_PINCM43)
+/* Defines for CS: GPIOB.20 with pinCMx 48 on package pin 19 */
+#define PORTB_CS_PIN                                            (DL_GPIO_PIN_20)
+#define PORTB_CS_IOMUX                                           (IOMUX_PINCM48)
+/* Port definition for Pin Group ENCODER */
+#define ENCODER_PORT                                                     (GPIOB)
+
+/* Defines for D1: GPIOB.6 with pinCMx 23 on package pin 58 */
+#define ENCODER_D1_PIN                                           (DL_GPIO_PIN_6)
+#define ENCODER_D1_IOMUX                                         (IOMUX_PINCM23)
+/* Defines for D2: GPIOB.7 with pinCMx 24 on package pin 59 */
+#define ENCODER_D2_PIN                                           (DL_GPIO_PIN_7)
+#define ENCODER_D2_IOMUX                                         (IOMUX_PINCM24)
+/* Defines for P1: GPIOB.4 with pinCMx 17 on package pin 52 */
+// pins affected by this interrupt request:["P1","P2"]
+#define ENCODER_INT_IRQN                                        (GPIOB_INT_IRQn)
+#define ENCODER_INT_IIDX                        (DL_INTERRUPT_GROUP1_IIDX_GPIOB)
+#define ENCODER_P1_IIDX                                      (DL_GPIO_IIDX_DIO4)
+#define ENCODER_P1_PIN                                           (DL_GPIO_PIN_4)
+#define ENCODER_P1_IOMUX                                         (IOMUX_PINCM17)
+/* Defines for P2: GPIOB.5 with pinCMx 18 on package pin 53 */
+#define ENCODER_P2_IIDX                                      (DL_GPIO_IIDX_DIO5)
+#define ENCODER_P2_PIN                                           (DL_GPIO_PIN_5)
+#define ENCODER_P2_IOMUX                                         (IOMUX_PINCM18)
+/* Defines for W25Q64_CS: GPIOB.25 with pinCMx 56 on package pin 27 */
+#define PORTB_W25Q64_CS_PIN                                     (DL_GPIO_PIN_25)
+#define PORTB_W25Q64_CS_IOMUX                                    (IOMUX_PINCM56)
 
 /* clang-format on */
 
@@ -171,7 +243,9 @@ void SYSCFG_DL_SYSCTL_init(void);
 void SYSCFG_DL_Motor_PWM1_init(void);
 void SYSCFG_DL_Motor_PWM2_init(void);
 void SYSCFG_DL_TIMER_delay_init(void);
+void SYSCFG_DL_I2C_0_init(void);
 void SYSCFG_DL_UART_DEBUG_init(void);
+void SYSCFG_DL_SPI_0_init(void);
 
 
 bool SYSCFG_DL_saveConfiguration(void);
